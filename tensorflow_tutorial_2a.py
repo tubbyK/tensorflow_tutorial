@@ -1,9 +1,7 @@
 import tensorflow as tf
-import tensorflow.compat.v1.feature_column as fc
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import urllib
+
 
 class tutorial_2_linear_regression():
     def __init__(self):
@@ -15,7 +13,7 @@ class tutorial_2_linear_regression():
 
     def run(self):
         self.load_data()
-        self.plot_data(True)
+        self.plot_data()
         self.make_feature_cols()
         self.linear_regression()
 
@@ -55,7 +53,7 @@ class tutorial_2_linear_regression():
             feature_cols.append(tf.feature_column.numeric_column(feature_name, dtype=tf.float32))
         self.feature_cols = feature_cols.copy()
 
-    def make_input_func(self, data_df, label_df, num_epochs=10, shuffle=True, batch_size=32):
+    def make_input_func(self, data_df, label_df, num_epochs=1_000, shuffle=True, batch_size=32):
         def input_func():
             ds = tf.data.Dataset.from_tensor_slices((dict(data_df), label_df))
             if shuffle: ds = ds.shuffle(1_000)
