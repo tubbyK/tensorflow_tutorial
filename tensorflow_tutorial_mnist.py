@@ -33,6 +33,17 @@ class tensorflow_tutorial_mnist():
         (self.X_train, self.y_train), (self.X_test, self.y_test) = mnist.load_data()
         self.X_train, self.X_test = self.X_train/255.0, self.X_test/255.0
 
+    def view_img(self):
+        plt.figure(figsize=(10, 10))
+        for i in range(25):
+            plt.subplot(5, 5, i + 1)
+            plt.xticks([])
+            plt.yticks([])
+            plt.grid(False)
+            plt.imshow(self.X_train[i], cmap=plt.cm.binary)
+            plt.xlabel(self.y_train[i])
+        plt.show()
+
     def build_model(self):
         self.model = tf.keras.models.Sequential([
             tf.keras.layers.Flatten(input_shape=(28,28)),
